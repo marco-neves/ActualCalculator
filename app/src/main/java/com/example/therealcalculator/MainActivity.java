@@ -6,15 +6,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import java.lang.Math;
 
 public class MainActivity extends AppCompatActivity{
 
     private TextView calculatorText;
     private static final String TAG = "MainActivity";
 
-    float mValueOne, mValueTwo;
+    double mValueOne, mValueTwo;
 
-    boolean addition, subtract, multiplication, division, negation, remainder, dot;
+    boolean addition, subtract, multiplication, division, negation, remainder, dot, sine, cos;
     /*
     * onCreate() - Activity is actually being created
     * onStart() - Activity is being called to foreground
@@ -138,6 +139,13 @@ public class MainActivity extends AppCompatActivity{
                 }
 
                 break;
+            case R.id.pi_button:
+                newText = calculatorText.getText().toString().trim()+3.1459;
+                calculatorText.setText(newText);
+                Log.d(TAG, newText);
+
+                break;
+
             case R.id.ac_button:
                 calculatorText.setText("0");
                 Log.d(TAG, newText);
@@ -194,6 +202,21 @@ public class MainActivity extends AppCompatActivity{
 
                 break;
 
+            case R.id.sin_button:
+                mValueOne = Float.parseFloat(calculatorText.getText() + "");
+                sine = true;
+
+                calculatorText.setText(Math.sin( (Math.toRadians(mValueOne)) ) + "");
+
+                break;
+
+            case R.id.cos_button:
+                mValueOne = Float.parseFloat(calculatorText.getText() + "");
+                cos = true;
+                calculatorText.setText(Math.cos( (Math.toRadians(mValueOne)) ) + "");
+
+                break;
+
             case R.id.equals_button:
                 mValueTwo = Float.parseFloat(calculatorText.getText() + "");
 
@@ -232,6 +255,20 @@ public class MainActivity extends AppCompatActivity{
                     Log.d(TAG, newText);
                     remainder = false;
                 }
+
+//                if (sine == true) {
+//                    newText = Math.sin( (Math.toRadians(mValueOne)) ) + "";
+//                    calculatorText.setText(newText);
+//                    Log.d(TAG, newText);
+//                    remainder = false;
+//                }
+//
+//                if (sine == true) {
+//                    newText = Math.cos( (Math.toRadians(mValueOne)) ) + "";
+//                    calculatorText.setText(newText);
+//                    Log.d(TAG, newText);
+//                    remainder = false;
+//                }
 
                 break;
         }
